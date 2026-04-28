@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yaz Kuran Kursu Öğrenci Takip Sistemi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="login-container" class="container" style="max-width: 400px; margin-top: 100px; text-align: center;">
+        <header>
+            <h1>🕌 Sisteme Giriş</h1>
+        </header>
+        <div class="form-group">
+            <label>Yönetici Parolası</label>
+            <input type="password" id="adminPassword" placeholder="Parolayı giriniz...">
+        </div>
+        <button id="loginBtn" onclick="girisYap()" style="margin-top: 15px; width: 100%; padding: 12px; background-color: var(--primary-color); color: white;">GİRİŞ YAP</button>
+        <p id="hataMesaji" style="color: red; margin-top: 10px; display: none;">Hatalı parola!</p>
+    </div>
+
+    <div id="main-content" class="container" style="display: none;">
+        <header>
+            <h1><span id="islemDurumu"></span></h1> 
+            <h1>🕌 Keşkekçi Camii Yaz Kuran Kursu Öğrenci Takip Çizelgesi</h1>
+            <p>Öğrenci Kayıt ve Takip Paneli</p>
+            <button onclick="cikisYap()" style="background: #666; color: white; padding: 5px 10px; font-size: 0.8rem; margin-top: 10px;">GÜVENLİ ÇIKIŞ</button>
+        </header>
+        
+        <div class="gallery-container">
+            <div class="slider">
+                <img src="camii1.png" class="slide active" alt="Cami 1">
+                <img src="camii2.png" class="slide" alt="Cami 2">
+                <img src="camii3.jpg" class="slide" alt="Cami 3">
+                <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+                <button class="next" onclick="changeSlide(1)">&#10095;</button>
+            </div>
+        </div>
+
+        <form id="kayitFormu">
+            <input type="hidden" id="editIndex" value="-1"> 
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Öğrenci Ad Soyad</label>
+                    <input type="text" id="adSoyad" placeholder="Örn: Bilal Karaman" required>
+                </div>
+                <div class="form-group">
+                    <label>Veli Telefon</label>
+                    <input type="tel" id="telNo" placeholder="05XX XXX XX XX" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Eğitim Grubu</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="grup" value="Elif-Ba" checked> Elif-Ba (55 Sayfa)</label>
+                    <label><input type="radio" name="grup" value="Kur'an-ı Kerim"> Kur'an-ı Kerim (30 Cüz)</label>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Hoca Seçimi (Limit: 5)</label>
+                    <select id="hocaSecimi" required>
+                        <option value="">Seçiniz...</option>
+                        <option value="Hasan Karaman">Hasan Karaman</option>
+                        <option value="Osman Akdağ">Osman Akdağ</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label id="cuzEtiket">Bulunduğu Sayfa (1-55)</label>
+                    <input type="number" id="cuzNo" min="1" max="55" value="1" required>
+                </div>
+            </div>
+
+            <button type="submit" id="kaydetBtn">KAYDI TAMAMLA VE LİSTEYE EKLE</button>
+            <button type="button" id="vazgecBtn" style="display:none; background-color: #666; color: white; padding: 15px;">İPTAL</button>
+        </form>
+
+        <div class="stats">
+            <span id="toplamOgrenci">Toplam Kayıt: 0</span>
+        </div>
+
+        <div class="list-section">
+            <table id="ogrenciTablosu">
+                <thead>
+                    <tr>
+                        <th>Ad Soyad</th>
+                        <th>Telefon</th>
+                        <th>Hoca</th>
+                        <th>Grup</th>
+                        <th>Durum</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
